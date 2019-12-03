@@ -8,11 +8,15 @@ namespace FinancialPortal.Models
     public class Budgets
     {
         public int Id { get; set; }
-        public string HouseholdId { get; set; }
+        public int HouseholdId { get; set; }
         public string OwnerId { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
         public string TargetAmount { get; set; }
         public string CurrentAmount { get; set; }
+
+        //Nav
+        public virtual Households Household { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
     }
 }

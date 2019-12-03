@@ -11,5 +11,13 @@ namespace FinancialPortal.Models
         public string Name { get; set; }
         public string Greating { get; set; }
         public DateTime Created { get; set; }
+
+        //Nav
+        public virtual ICollection<Budgets> Budgets { get; set; }
+        public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; } 
+        public virtual ICollection<Transactions> Transactions { get; set; }
+        public virtual ICollection<Notifications> Notifications { get; set; }
+        public virtual ICollection<Invitations> Invitations { get; set; }
+
     }
 }
