@@ -11,7 +11,7 @@ namespace FinancialPortal.Models
         public int HouseholdId { get; set; }
         public bool IsValid { get; set; }
         public DateTime Created { get; set; }
-        //public string TTL { get; set; }
+        public int TTL { get; set; }
         public string RecipientEmail { get; set; }
         public string Code { get; set; }
 

@@ -12,12 +12,20 @@ namespace FinancialPortal.Models
         public string OwnerId { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
-        public enum AccountType {  }
+        public enum AccountType { }
         public string StartingBalance { get; set; }
         public string CurrentBalance { get; set; }
 
         //Nav
         public virtual Households Household { get; set; }
         public virtual ApplicationUser Owner { get; set; }
+
+        public virtual ICollection<Transactions> Transactions { get; set; }
+
+        //Constructor
+        public BankAccounts()
+        {
+            Transactions = new HashSet<Transactions>();
+        }
     }
 }

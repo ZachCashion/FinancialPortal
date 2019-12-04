@@ -17,5 +17,13 @@ namespace FinancialPortal.Models
         //Nav
         public virtual Budgets Budget { get; set; }
 
+        public virtual ICollection<Transactions> Transactions { get; set; }
+
+        //Constructor
+        public BudgetItems()
+        {
+            Transactions = new HashSet<Transactions>();
+        }
+
     }
 }

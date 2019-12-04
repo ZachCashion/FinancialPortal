@@ -22,7 +22,10 @@ namespace FinancialPortal.Models
 
         public string AvatarPath { get; set; }
 
-        public string HouseholdId { get; set; }
+        public int HouseholdId { get; set; }
+
+        //Nav
+        //public virtual Households Household { get; set; }
 
         public virtual ICollection<Transactions> Transactions { get; set; }
         public virtual ICollection<Notifications> Notifications { get; set; }

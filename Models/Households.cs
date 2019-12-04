@@ -15,7 +15,6 @@ namespace FinancialPortal.Models
         //Nav
         public virtual ICollection<Budgets> Budgets { get; set; }
         public virtual ICollection<ApplicationUser> ApplicationUsers { get; set; } 
-        public virtual ICollection<Transactions> Transactions { get; set; }
         public virtual ICollection<Notifications> Notifications { get; set; }
         public virtual ICollection<Invitations> Invitations { get; set; }
 
@@ -24,7 +23,6 @@ namespace FinancialPortal.Models
         {
             Budgets = new HashSet<Budgets>();
             ApplicationUsers = new HashSet<ApplicationUser>();
-            Transactions = new HashSet<Transactions>();
             Notifications = new HashSet<Notifications>();
             Invitations = new HashSet<Invitations>();
         }
