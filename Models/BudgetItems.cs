@@ -16,6 +16,6 @@ namespace FinancialPortal.Models
 
         //Nav
         public virtual Budgets Budget { get; set; }
-        
+
     }
 }

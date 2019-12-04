@@ -18,5 +18,15 @@ namespace FinancialPortal.Models
         //Nav
         public virtual Households Household { get; set; }
         public virtual ApplicationUser Owner { get; set; }
+
+        public virtual ICollection<BudgetItems> BudgetItems { get; set; }
+        public virtual ICollection<Transactions> Transactions { get; set; }
+
+        //Constructor
+        public Budgets()
+        {
+            BudgetItems = new HashSet<BudgetItems>();
+            Transactions = new HashSet<Transactions>();
+        }
     }
 }

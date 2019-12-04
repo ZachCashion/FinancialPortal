@@ -19,5 +19,15 @@ namespace FinancialPortal.Models
         public virtual ICollection<Notifications> Notifications { get; set; }
         public virtual ICollection<Invitations> Invitations { get; set; }
 
+        //Constructor
+        public Households()
+        {
+            Budgets = new HashSet<Budgets>();
+            ApplicationUsers = new HashSet<ApplicationUser>();
+            Transactions = new HashSet<Transactions>();
+            Notifications = new HashSet<Notifications>();
+            Invitations = new HashSet<Invitations>();
+        }
+
     }
 }

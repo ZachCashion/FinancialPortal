@@ -12,7 +12,7 @@ namespace FinancialPortal.Models
         public string OwnerId { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
-        //public string AccountType { get; set; }
+        public enum AccountType {  }
         public string StartingBalance { get; set; }
         public string CurrentBalance { get; set; }
 

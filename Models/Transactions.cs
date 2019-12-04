@@ -11,7 +11,7 @@ namespace FinancialPortal.Models
         public int BankAccountId { get; set; }
         public int BudgetItemId { get; set; }
         public int OwnerId { get; set; }
-        //public string TransactionTypeId { get; set; }
+        public enum TransactionType {  }
         public DateTime Created { get; set; }
         public string Amount { get; set; }
         public string Memo { get; set; }
