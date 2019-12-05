@@ -159,7 +159,7 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color: #E81B0C;
   text-decoration: none;
   background-color: transparent;
 }
@@ -2278,7 +2278,7 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #2653d4;
+  background-color: #E81B0C;
   border-color: #244ec9;
 }
 
