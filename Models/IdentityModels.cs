@@ -63,5 +63,7 @@ namespace FinancialPortal.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<FinancialPortal.Models.Notifications> Notifications { get; set; }
     }
 }
