@@ -8,7 +8,7 @@ namespace FinancialPortal.Models
     public class Transactions
     {
         public int Id { get; set; }
-        public int BudgetItemId { get; set; }
+        public int? BudgetItemId { get; set; }
         public int BankAccountId { get; set; }
         public string OwnerId { get; set; }
         public enum TransactionType { }
