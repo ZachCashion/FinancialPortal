@@ -41,7 +41,7 @@ namespace FinancialPortal.Controllers
         {
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "OwnerId");
             ViewBag.BudgetItemId = new SelectList(db.BudgetItems, "Id", "Name");
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName");
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace FinancialPortal.Controllers
 
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "OwnerId", transactions.BankAccountId);
             ViewBag.BudgetItemId = new SelectList(db.BudgetItems, "Id", "Name", transactions.BudgetItemId);
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName", transactions.OwnerId);
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName", transactions.OwnerId);
             return View(transactions);
         }
 
@@ -79,7 +79,7 @@ namespace FinancialPortal.Controllers
             }
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "OwnerId", transactions.BankAccountId);
             ViewBag.BudgetItemId = new SelectList(db.BudgetItems, "Id", "Name", transactions.BudgetItemId);
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName", transactions.OwnerId);
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName", transactions.OwnerId);
             return View(transactions);
         }
 
@@ -98,7 +98,7 @@ namespace FinancialPortal.Controllers
             }
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "OwnerId", transactions.BankAccountId);
             ViewBag.BudgetItemId = new SelectList(db.BudgetItems, "Id", "Name", transactions.BudgetItemId);
-            ViewBag.OwnerId = new SelectList(db.ApplicationUsers, "Id", "FirstName", transactions.OwnerId);
+            ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName", transactions.OwnerId);
             return View(transactions);
         }
 
