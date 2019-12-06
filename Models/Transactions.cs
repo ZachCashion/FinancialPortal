@@ -10,8 +10,8 @@ namespace FinancialPortal.Models
         public int Id { get; set; }
         public int? BudgetItemId { get; set; }
         public int BankAccountId { get; set; }
-        public string OwnerId { get; set; }
-        public enum TransactionType { }
+        public int TransactionCatagoryId { get; set; }
+        public string OwnerId { get; set; }      
         public DateTime Created { get; set; }
         public string Amount { get; set; }
         public string Memo { get; set; }
@@ -22,5 +22,6 @@ namespace FinancialPortal.Models
         public virtual BudgetItems BudgetItem { get; set; }
         public virtual BankAccounts BankAccount { get; set; }
         public virtual ApplicationUser Owner { get; set; }
+        public virtual TransactionCatagory TransactionCatagory { get; set; }
     }
 }

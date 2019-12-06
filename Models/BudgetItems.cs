@@ -11,7 +11,7 @@ namespace FinancialPortal.Models
         public int BudgetId { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
-        public enum Category { }
+        public int BudgetItemTypeId { get; set; }
         public string Amount { get; set; }
         public string Frequency { get; set; }
         public bool IncomeExpense { get; set; }
@@ -19,6 +19,7 @@ namespace FinancialPortal.Models
 
         //Nav
         public virtual Budgets Budget { get; set; }
+        public virtual BudgetItemCatagory BudgetItemCatagory { get; set; }
 
         public virtual ICollection<Transactions> Transactions { get; set; }
 
