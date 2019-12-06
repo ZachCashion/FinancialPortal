@@ -31,6 +31,11 @@ namespace FinancialPortal.Migrations
                 roleManager.Create(new IdentityRole { Name = "Admin" });
             }
 
+            if (!context.Roles.Any(r => r.Name == "HouseholdHead"))
+            {
+                roleManager.Create(new IdentityRole { Name = "HouseholdHead" });
+            }
+
             //User Creation
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var demoPassword = WebConfigurationManager.AppSettings["DemoPassword"];
