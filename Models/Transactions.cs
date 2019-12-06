@@ -15,6 +15,7 @@ namespace FinancialPortal.Models
         public DateTime Created { get; set; }
         public string Amount { get; set; }
         public string Memo { get; set; }
+        public bool DipositWithdraw { get; set; }
 
 
         //Nav 

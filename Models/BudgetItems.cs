@@ -11,8 +11,11 @@ namespace FinancialPortal.Models
         public int BudgetId { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
-        public string TargetAmount { get; set; }
-        public string CurrentAmount { get; set; }
+        public enum Category { }
+        public string Amount { get; set; }
+        public string Frequency { get; set; }
+        public bool IncomeExpense { get; set; }
+        
 
         //Nav
         public virtual Budgets Budget { get; set; }
