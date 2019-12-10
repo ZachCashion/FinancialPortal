@@ -36,6 +36,13 @@ namespace FinancialPortal.Migrations
                 roleManager.Create(new IdentityRole { Name = "HouseholdHead" });
             }
 
+            //Households
+            context.Households.AddOrUpdate(
+                h => h.Name,
+                new Households { Id = 1, Name ="Cashion", Greating ="Welcome", Created = DateTime.Now }
+                );
+            
+
             //User Creation
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var demoPassword = WebConfigurationManager.AppSettings["DemoPassword"];
@@ -49,13 +56,16 @@ namespace FinancialPortal.Migrations
                     FirstName = "Demo",
                     LastName = "Admin",
                     DisplayName = "DemoAdmin",
-                    AvatarPath = "/Avatar/avatarPlaceholder.png"
+                    AvatarPath = "/Avatar/avatarPlaceholder.png",
+                    HouseholdId = 1
                 }, demoPassword);
             }
 
             //Assign Roles
             var adminId = userManager.FindByEmail("DemoAdmin@Mailinator.com").Id;
-            userManager.AddToRole(adminId, "Admin");
+            userManager.AddToRole(adminId, "HouseholdHead");
+
+            
         }
     }
 }
