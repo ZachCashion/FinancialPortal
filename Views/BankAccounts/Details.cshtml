@@ -4,43 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name) Account</h2>
+
+
 
 <div>
-    <h4>BankAccounts</h4>
-    <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Household.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Household.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Owner.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Owner.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.StartingBalance)
@@ -61,6 +30,79 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold">Transactions</h6>
+    </div>
+    <div class="card-body">
+        <p>
+            <a class="btn btn-primary" href="@Url.Action("Create", "Transactions")">Create New</a>
+        </p>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+
+                        <th>
+                            @Html.DisplayName("BudgetItem.Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Owner.FirstName")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Created")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Amount")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Memo")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Owner")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+
+                @foreach (var Transation in Model.Transactions.OrderByDescending(c => c.Created))
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => Transation.BudgetItem.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Transation.Owner.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Transation.Created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Transation.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Transation.Memo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Transation.BankAccount.OwnerId)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = Transation.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = Transation.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = Transation.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

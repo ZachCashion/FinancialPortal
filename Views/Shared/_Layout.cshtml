@@ -113,35 +113,7 @@
 
 
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">@NotificationHelper.GetUnReadNotifications().Count()</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Notifications
-                                </h6>
-                                @foreach (var unreadNotification in NotificationHelper.GetUnReadNotifications())
-                                {
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div>
-                                            <div class="small text-gray-500">@unreadNotification.Created.ToString("MMM dd,yyyy")</div>
-                                            <span class="font-weight-bold">@unreadNotification.Body</span>
-                                        </div>
-                                    </a>
-                                }
-
-
-                                <a class="dropdown-item text-center small text-gray-500" href="@Url.Action("Index", "TicketNotifications")">Show All Notifications</a>
-                            </div>
-                        </li>
-
-
-                        <li class="topbar-divider d-none d-sm-block"></li>
+                       
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
