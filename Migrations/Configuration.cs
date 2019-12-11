@@ -65,6 +65,14 @@ namespace FinancialPortal.Migrations
             var adminId = userManager.FindByEmail("DemoAdmin@Mailinator.com").Id;
             userManager.AddToRole(adminId, "HouseholdHead");
 
+
+            //Bank Accounts
+
+            //Transactions
+
+            //Budgets
+
+            //Budget Items
             
         }
     }

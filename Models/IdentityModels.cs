@@ -75,5 +75,7 @@ namespace FinancialPortal.Models
         public System.Data.Entity.DbSet<FinancialPortal.Models.BudgetItems> BudgetItems { get; set; }
 
         public System.Data.Entity.DbSet<FinancialPortal.Models.Transactions> Transactions { get; set; }
+
+        public System.Data.Entity.DbSet<FinancialPortal.Models.TransactionCatagory> TransactionCatagories { get; set; }
     }
 }

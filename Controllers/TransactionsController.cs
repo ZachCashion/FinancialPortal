@@ -40,6 +40,7 @@ namespace FinancialPortal.Controllers
         // GET: Transactions/Create
         public ActionResult Create()
         {
+            ViewBag.TransactionCatagoryId = new SelectList(db.TransactionCatagories, "Id", "Name");
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "Name");
             ViewBag.BudgetItemId = new SelectList(db.BudgetItems, "Id", "Name");
             ViewBag.OwnerId = new SelectList(db.Users, "Id", "FirstName");
@@ -58,7 +59,7 @@ namespace FinancialPortal.Controllers
                 transactions.OwnerId = User.Identity.GetUserId();
                 db.Transactions.Add(transactions);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BankAccounts", new { id = transactions.BankAccount.Id});
             }
 
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "OwnerId", transactions.BankAccountId);
