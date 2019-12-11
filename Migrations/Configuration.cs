@@ -37,10 +37,7 @@ namespace FinancialPortal.Migrations
             }
 
             //Households
-            context.Households.AddOrUpdate(
-                h => h.Name,
-                new Households { Id = 1, Name ="Cashion", Greating ="Welcome", Created = DateTime.Now }
-                );
+            
             
 
             //User Creation
@@ -56,8 +53,8 @@ namespace FinancialPortal.Migrations
                     FirstName = "Demo",
                     LastName = "Admin",
                     DisplayName = "DemoAdmin",
-                    AvatarPath = "/Avatar/avatarPlaceholder.png",
-                    HouseholdId = 1
+                    AvatarPath = "/Avatar/avatarPlaceholder.png"
+                    
                 }, demoPassword);
             }
 

@@ -12,7 +12,7 @@ namespace FinancialPortal.Models
         public bool IsValid { get; set; }
         public DateTime Created { get; set; }
         public int TTL { get; set; }
-        public string RecipientEmail { get; set; }
+        public string RecipientEmail { get; set; } 
         public Guid Code { get; set; }
 
         //Nav

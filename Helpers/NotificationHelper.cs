@@ -11,10 +11,10 @@ namespace FinancialPortal.Helpers
     {
         private static ApplicationDbContext db = new ApplicationDbContext();
         
-        public static List<Notifications> GetUnReadNotifications()
-        {
-            var currentUserId = HttpContext.Current.User.Identity.GetUserId();
-            return db.Notifications.Include("Recipient").Where(t => t.RecipientId == currentUserId && !t.IsRead).ToList();
-        }
+        //public static List<Notifications> GetUnReadNotifications()
+        //{
+            //var currentUserId = HttpContext.Current.User.Identity.GetUserId();
+            //return db.Notifications.Include("Recipient").Where(t => t.RecipientId == currentUserId && !t.IsRead).ToList();
+        //}
     }
 }
