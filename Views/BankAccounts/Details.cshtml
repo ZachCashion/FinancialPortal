@@ -42,7 +42,7 @@
     </div>
     <div class="card-body">
         <p>
-            <a class="btn btn-primary" href="@Url.Action("Create", "Transactions")">Create New</a>
+            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#CreateModal">Create New</a> 
         </p>
         <div class="table-responsive">
             <table class="table table-bordered" id="" width="100%" cellspacing="0">
@@ -95,14 +95,79 @@
                             @Html.DisplayFor(modelItem => Transation.BankAccount.OwnerId)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = Transation.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = Transation.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = Transation.Id })
+                          <a href="@Url.Action("Edit", "Transactions", new { id = Transation.Id })">Edit</a>  |
+                          <a href="@Url.Action("Delete", "Transactions", new { id = Transation.Id })">Delete</a>
                         </td>
                     </tr>
                 }
 
             </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Create Modal-->
+<div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <h2>Create</h2>
+
+                @using (Html.BeginForm("Create", "Transaction", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("BankAccountId", Model.Id)
+                    
+
+                    <div class="form-horizontal">
+                        <h4>Transactions</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Editor("Created", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Amount", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Editor("Amount", new { htmlAttributes = new { @class = "form-control" } })
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Memo", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.Editor("Memo", new { htmlAttributes = new { @class = "form-control" } })
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
