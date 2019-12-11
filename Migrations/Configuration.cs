@@ -37,8 +37,11 @@ namespace FinancialPortal.Migrations
             }
 
             //Households
-            
-            
+            context.Households.AddOrUpdate(
+                h => h.Name,
+                    new Households { Name = "Cashion", Greating = "Welcome", Created = DateTime.Now } 
+                );
+            context.SaveChanges();
 
             //User Creation
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -53,8 +56,8 @@ namespace FinancialPortal.Migrations
                     FirstName = "Demo",
                     LastName = "Admin",
                     DisplayName = "DemoAdmin",
-                    AvatarPath = "/Avatar/avatarPlaceholder.png"
-                    
+                    AvatarPath = "/Avatar/avatarPlaceholder.png",
+                    HouseholdId = 1
                 }, demoPassword);
             }
 
@@ -62,15 +65,33 @@ namespace FinancialPortal.Migrations
             var adminId = userManager.FindByEmail("DemoAdmin@Mailinator.com").Id;
             userManager.AddToRole(adminId, "HouseholdHead");
 
+            context.SaveChanges();
+
+            var user = userManager.FindByEmail("DemoAdmin@Mailinator.com");
+
 
             //Bank Accounts
-
-            //Transactions
+            context.BankAccounts.AddOrUpdate(
+                new BankAccounts { Id = 1, HouseholdId = 1, Created = DateTime.Now, Name = "Checking", OwnerId = user.Id, StartingBalance = "10000", CurrentBalance = "10000" },
+                new BankAccounts { Id = 2, HouseholdId = 1, Created = DateTime.Now, Name = "Savings", OwnerId = user.Id, StartingBalance = "10000", CurrentBalance = "10000" }
+                );
 
             //Budgets
+            context.Budgets.AddOrUpdate(
+                new Budgets { Id = 1, HouseholdId = 1, OwnerId = user.Id, Created = DateTime.Now, Name = "MyBudget", TargetAmount = "10000", CurrentAmount = "10000" }
+                );
+
+            context.SaveChanges();
+
+            //Transactions
+            context.Transactions.AddOrUpdate(
+                new Transactions { BankAccountId = 1, OwnerId = user.Id, Created = DateTime.Now, Amount = "1000", Memo = "new", DipositWithdraw = false  }
+                );
 
             //Budget Items
-            
+            context.BudgetItems.AddOrUpdate(
+                new BudgetItems { BudgetId = 1, Created = DateTime.Now, Name = "Food", Amount = "100", Frequency = "2", IncomeExpense = false}
+                );
         }
     }
 }
