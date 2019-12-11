@@ -13,7 +13,7 @@ namespace FinancialPortal.Models
         public DateTime Created { get; set; }
         public int TTL { get; set; }
         public string RecipientEmail { get; set; }
-        public string Code { get; set; }
+        public Guid Code { get; set; }
 
         //Nav
         public virtual Households Household { get; set; }
