@@ -64,6 +64,16 @@ namespace FinancialPortal.Models
             return new ApplicationDbContext();
         }
 
-       
+        public System.Data.Entity.DbSet<FinancialPortal.Models.Households> Households { get; set; }
+
+        public System.Data.Entity.DbSet<FinancialPortal.Models.BankAccounts> BankAccounts { get; set; }
+
+        public System.Data.Entity.DbSet<FinancialPortal.Models.ApplicationUser> ApplicationUsers { get; set; }
+
+        public System.Data.Entity.DbSet<FinancialPortal.Models.Budgets> Budgets { get; set; }
+
+        public System.Data.Entity.DbSet<FinancialPortal.Models.BudgetItems> BudgetItems { get; set; }
+
+        public System.Data.Entity.DbSet<FinancialPortal.Models.Transactions> Transactions { get; set; }
     }
 }
