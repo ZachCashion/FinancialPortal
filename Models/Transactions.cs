@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinancialPortal.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace FinancialPortal.Models
         public int Id { get; set; }
         public int? BudgetItemId { get; set; }
         public int BankAccountId { get; set; }
-        public enum TransactionCatagory { Housing, Transportation, Food, Utilities, Clothing, Medical, Insurance, Personal, Debt, Education, Savings, Entertainment }
+        public TransactionCatagory TransactionCatagory { get; set; }
         public string OwnerId { get; set; }      
         public DateTime Created { get; set; }
         public string Amount { get; set; }

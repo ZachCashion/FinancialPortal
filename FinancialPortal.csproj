@@ -175,6 +175,9 @@
     <Compile Include="Controllers\HouseholdsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
+    <Compile Include="Enums\AccountType.cs" />
+    <Compile Include="Enums\BudgetItemCatagory.cs" />
+    <Compile Include="Enums\TransactionCatagory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

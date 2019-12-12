@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinancialPortal.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,7 @@ namespace FinancialPortal.Models
         public int BudgetId { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
-        public enum BudgetItemCatagory { Housing, Transportation, Food, Utilities, Clothing, Medical, Insurance, Personal, Debt, Education, Savings, Entertainment }
+        public BudgetItemCatagory BudgetItemCatagory { get; set; }
         public string Amount { get; set; }
         public string Frequency { get; set; }
         public bool IncomeExpense { get; set; }

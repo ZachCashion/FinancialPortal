@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinancialPortal.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,7 +13,7 @@ namespace FinancialPortal.Models
         public string OwnerId { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
-        public enum AccountType { Checking, Savings, Credit }
+        public AccountType AccountType { get; set; }
         public string StartingBalance { get; set; }
         public string CurrentBalance { get; set; }
 
