@@ -185,6 +185,10 @@
     <Compile Include="Helpers\ImageUploadValidator.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\Slug.cs" />
+    <Compile Include="Migrations\201912131421176_InitialCreate.cs" />
+    <Compile Include="Migrations\201912131421176_InitialCreate.Designer.cs">
+      <DependentUpon>201912131421176_InitialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BankAccounts.cs" />
@@ -308,6 +312,11 @@
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
     <None Include="Properties\PublishProfiles\ZachCashionFinancialPortal - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912131421176_InitialCreate.resx">
+      <DependentUpon>201912131421176_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
