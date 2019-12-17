@@ -199,6 +199,27 @@ namespace FinancialPortal.Controllers
         }
 
         //
+        // Accept Invitation
+        public ActionResult AcceptInvitation(string recipientEmail, string code)
+        {
+            var realGuid = Guid.Parse(code);
+            var invitation = db.Invitations.FirstOrDefault(i => i.RecipientEmail == recipientEmail && i.Code == realGuid);
+
+            if (invitation == null)
+                return View("NotFoundError", invitation);
+
+            var expirationDate = invitation.Created.AddDays(invitation.TTL);
+            if(invitation.IsValid && DateTime.Now < expirationDate)
+            {
+                var houseHoldName = db.Households.Find(invitation.HouseholdId).Name;
+                ViewBag.Greeting = $""
+            }
+
+            return View(invitation);
+        }
+
+
+        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()

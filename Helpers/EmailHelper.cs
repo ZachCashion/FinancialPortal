@@ -80,5 +80,18 @@ namespace FinancialPortal.Helpers
             }
         }
 
+        public static async Task EmailInvitation()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                await Task.FromResult(0);
+            }
+        }
+
     }
 }
