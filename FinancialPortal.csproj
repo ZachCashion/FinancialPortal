@@ -187,6 +187,7 @@
     <Compile Include="Helpers\ImageUploadValidator.cs" />
     <Compile Include="Helpers\NotificationHelper.cs" />
     <Compile Include="Helpers\Slug.cs" />
+    <Compile Include="Helpers\UserRolesHelper.cs" />
     <Compile Include="Migrations\201912131421176_InitialCreate.cs" />
     <Compile Include="Migrations\201912131421176_InitialCreate.Designer.cs">
       <DependentUpon>201912131421176_InitialCreate.cs</DependentUpon>
@@ -319,6 +320,7 @@
     <Content Include="Views\Invitations\Details.cshtml" />
     <Content Include="Views\Invitations\Edit.cshtml" />
     <Content Include="Views\Invitations\Index.cshtml" />
+    <Content Include="Views\Account\AcceptInvitation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912131421176_InitialCreate.resx">

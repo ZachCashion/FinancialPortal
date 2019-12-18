@@ -21,6 +21,8 @@ namespace FinancialPortal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private UserRolesHelper roleHelper = new UserRolesHelper();
+
 
         public AccountController()
         {
@@ -212,10 +214,53 @@ namespace FinancialPortal.Controllers
             if(invitation.IsValid && DateTime.Now < expirationDate)
             {
                 var houseHoldName = db.Households.Find(invitation.HouseholdId).Name;
-                ViewBag.Greeting = $""
+                ViewBag.Greeting = $"<center>Thank You for accepting my invitation to join {houseHoldName}.</center><br />Th";
+
+                var invitationVm = new AcceptInvitationViewModel
+                {
+                    Id = invitation.Id,
+                    Email = recipientEmail,
+                    Code = realGuid,
+                    HouseholdId = invitation.HouseholdId
+                };
+
+                return View(invitationVm);
             }
 
-            return View(invitation);
+            return View("AcceptError", invitation);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AcceptInvitation(AcceptInvitationViewModel invitationvm)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    FirstName = invitationvm.FirstName,
+                    LastName = invitationvm.LastName,
+                    DisplayName = invitationvm.FirstName + " " + invitationvm.LastName,
+                    UserName = invitationvm.Email,
+                    Email = invitationvm.Email,
+                    AvatarPath = "/Avatar/avatarPlaceholder.png",
+                    HouseholdId = invitationvm.HouseholdId
+                };
+
+                var result = await UserManager.CreateAsync(user, invitationvm.Password);
+                if (result.Succeeded)
+                {
+                    //InvitationHelper.MarkAsIvnalid(invitationvm.Id);
+
+                    roleHelper.AddUserToRole(user.Id, "Member");
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+            return View(invitationvm);
         }
 
 

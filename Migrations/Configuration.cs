@@ -36,6 +36,11 @@ namespace FinancialPortal.Migrations
                 roleManager.Create(new IdentityRole { Name = "HouseholdHead" });
             }
 
+            if (!context.Roles.Any(r => r.Name == "Member"))
+            {
+                roleManager.Create(new IdentityRole { Name = "Member" });
+            }
+
             //Households
             context.Households.AddOrUpdate(
                 h => h.Name,

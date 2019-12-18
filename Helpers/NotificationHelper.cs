@@ -16,5 +16,10 @@ namespace FinancialPortal.Helpers
             //var currentUserId = HttpContext.Current.User.Identity.GetUserId();
             //return db.Notifications.Include("Recipient").Where(t => t.RecipientId == currentUserId && !t.IsRead).ToList();
         //}
+
+        public void SendNewRoleNotification(string NewHoh, string role)
+        {
+
+        }
     }
 }

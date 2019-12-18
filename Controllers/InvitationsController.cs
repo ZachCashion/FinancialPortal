@@ -54,7 +54,8 @@ namespace FinancialPortal.Controllers
 
             var invitation = new Invitations 
             { 
-                HouseholdId = houseId 
+                HouseholdId = houseId,
+                TTL = 7
             };
 
             return View(invitation);
@@ -77,7 +78,7 @@ namespace FinancialPortal.Controllers
 
                 await invitations.EmailInvitation();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Households");
             }
 
             

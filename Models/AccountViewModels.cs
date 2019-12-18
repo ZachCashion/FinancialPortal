@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinancialPortal.Models
@@ -116,5 +117,12 @@ namespace FinancialPortal.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class AcceptInvitationViewModel : RegisterViewModel
+    {
+        public int Id { get; set; }
+        public Guid Code { get; set; }
+        public int HouseholdId { get; set; }
     }
 }
