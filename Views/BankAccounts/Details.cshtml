@@ -4,49 +4,54 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Created")
-        </th>
-        <th>
-            @Html.DisplayName("")
-        </th>
-        <th>
-            @Html.DisplayName("")
-        </th>
-        <th>
-            @Html.DisplayName("")
-        </th>
-        <th></th>
-    </tr>
+<div class="col-lg-6 col-sm-12">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold">@Html.DisplayFor(model => model.Name) Account Transactions</h6>
+        </div>
+        <div class="card-body">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <tr>
 
-    @foreach (var item in Model.Transactions)
-    {
-        <tr>
-            <td> 
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Memo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DipositWithdraw)
-            </td>
-            <td>
-                <a href="@Url.Action("Edit", "Transactions", new { id = item.Id })">Edit</a> |
-                <a href="@Url.Action("Delete", "Transactions", new { id = item.Id })">Delete</a>
-            </td>
-        </tr>
-    }
+                    <th>
+                        @Html.DisplayName("Amount")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Memo")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Created")
+                    </th>
 
-</table>
+                    <th></th>
+                </tr>
 
+                @foreach (var item in Model.Transactions.OrderByDescending(c => c.Created))
+                {
+                    <tr>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Memo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Created)
+                        </td>
+                        
+                        <td>
+                            <a href="@Url.Action("Edit", "Transactions", new { id = item.Id })">Edit</a> |
+                            <a href="@Url.Action("Delete", "Transactions", new { id = item.Id })">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
