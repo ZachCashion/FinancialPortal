@@ -120,6 +120,12 @@
     <!-- Custom scripts for all pages-->
     <script src="~/Scripts/sb-admin-2.min.js"></script>
 
+    <script>
+        if (performance.navigation.type == 2) {
+            location.reload(true);
+        }
+    </script>
+
 </body>
 
 </html>
