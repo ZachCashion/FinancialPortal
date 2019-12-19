@@ -4,38 +4,48 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Household</h2>
 
-<div>
-    <h4>Members</h4>
-    <table class="table">
-        <tr>
+<div class="col-lg-6 col-sm-12">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold">Members</h6>
+        </div>
+        <div class="card-body">
+            
+            <table class="table table-bordered" width="100%" cellspacing="0">
+                <tr>
 
-            <th>
-                @Html.DisplayName("Name")
-            </th>
-            <th>
-                @Html.DisplayName("Email")
-            </th>
+                    <th>
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Email")
+                    </th>
 
-        </tr>
+                </tr>
 
-        @foreach (var item in Model.ApplicationUsers)
-        {
-            <tr>
+                @foreach (var item in Model.ApplicationUsers)
+                {
+                    <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.DisplayName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modeItem => item.Email)
-                </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DisplayName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modeItem => item.Email)
+                        </td>
 
-            </tr>
-        }
+                    </tr>
+                }
 
-    </table>
+            </table>
+        </div>
+    </div>
 </div>
+
+
+
 <div>Invite another user to join your household. </div>
 <div><a href="@Url.Action("Create", "Invitations")">Invite</a></div>
 
