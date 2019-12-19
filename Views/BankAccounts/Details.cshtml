@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
             <p>
-                @Html.ActionLink("Create New", "Create")
+                <a href="@Url.Action("Create", "Transactions")">Create New Transaction</a>
             </p>
             <table class="table table-bordered" width="100%" cellspacing="0">
                 <tr>
@@ -33,7 +33,7 @@
                 @foreach (var item in Model.Transactions.OrderByDescending(c => c.Created))
                 {
                     <tr>
-                        
+
                         <td>
                             @Html.DisplayFor(modelItem => item.Amount)
                         </td>
@@ -43,7 +43,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Created)
                         </td>
-                        
+
                         <td>
                             <a href="@Url.Action("Edit", "Transactions", new { id = item.Id })">Edit</a> |
                             <a href="@Url.Action("Delete", "Transactions", new { id = item.Id })">Delete</a>
@@ -52,6 +52,9 @@
                 }
 
             </table>
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
         </div>
     </div>
 </div>
