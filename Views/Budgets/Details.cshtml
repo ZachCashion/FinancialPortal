@@ -4,63 +4,111 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Budget</h2>
 
-<div>
-    <h4>Budgets</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Household.Name)
-        </dt>
+<hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.Household.Name)
-        </dd>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="row">
+            <h4>Income</h4>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Category")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Amount")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Frequency")
+                    </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Owner.FirstName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Owner.FirstName)
-        </dd>
+                </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
+                @foreach (var item in Model.BudgetItems)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modeItem => item.BudgetItemCatagory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Frequency)
+                        </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                    </tr>
+                }
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            </table>
+        </div>
+        <div class="row">
+            <h4>Expenses</h4>
+            <table class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayName("Name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Category")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Amount")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Frequency")
+                    </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TargetAmount)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TargetAmount)
-        </dd>
+                </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CurrentAmount)
-        </dt>
+                @foreach (var item in Model.BudgetItems)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modeItem => item.BudgetItemCatagory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Frequency)
+                        </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.CurrentAmount)
-        </dd>
 
-    </dl>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        
+    </div>
+
+    <div class="col-sm-6">
+        
+
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

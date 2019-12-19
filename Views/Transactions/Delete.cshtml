@@ -74,7 +74,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <a href="@Url.Action("Details", "BankAccounts", new { id = Model.BankAccount.Id })">Back to List</a>
         </div>
     }
 </div>

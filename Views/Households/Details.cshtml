@@ -7,36 +7,32 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Households</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <h4>Members</h4>
+    <table class="table">
+        <tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("Email")
+            </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Greating)
-        </dt>
+        </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Greating)
-        </dd>
+        @foreach (var item in Model.ApplicationUsers)
+        {
+            <tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modeItem => item.Email)
+                </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+            </tr>
+        }
 
-    </dl>
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

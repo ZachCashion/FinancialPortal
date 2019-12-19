@@ -27,17 +27,13 @@ namespace FinancialPortal.Controllers
         }
 
         // GET: Households/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            var id = user.Household.Id;
             Households households = db.Households.Find(id);
-            if (households == null)
-            {
-                return HttpNotFound();
-            }
+            
             return View(households);
         }
 

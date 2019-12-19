@@ -83,5 +83,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Details", "BankAccounts", new { id = Model.BankAccount.Id })">Back to List</a>
 </div>
