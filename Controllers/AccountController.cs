@@ -214,7 +214,7 @@ namespace FinancialPortal.Controllers
             if(invitation.IsValid && DateTime.Now < expirationDate)
             {
                 var houseHoldName = db.Households.Find(invitation.HouseholdId).Name;
-                ViewBag.Greeting = $"<center>Thank You for accepting my invitation to join {houseHoldName}.</center><br />Th";
+                ViewBag.Greeting = $"<center>Thank You for accepting my invitation to join {houseHoldName}.</center><br />";
 
                 var invitationVm = new AcceptInvitationViewModel
                 {

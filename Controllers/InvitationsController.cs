@@ -42,7 +42,7 @@ namespace FinancialPortal.Controllers
             return View(invitations);
         }
 
-        [Authorize(Roles = "HouseholdHead")]
+        [Authorize(Roles = "Member, HouseholdHead" )]
         // GET: Invitations/Create
         public ActionResult Create()
         {

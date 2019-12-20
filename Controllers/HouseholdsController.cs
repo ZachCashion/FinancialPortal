@@ -11,6 +11,7 @@ using FinancialPortal.Helpers;
 using FinancialPortal.Models;
 using Microsoft.AspNet.Identity;
 using FinancialPortal.Extensions;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FinancialPortal.Controllers
 {
@@ -23,15 +24,23 @@ namespace FinancialPortal.Controllers
         // GET: Households
         public ActionResult Index()
         {
-            return View(db.Households.ToList());
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            var HouseId = user.Household.Id;
+            if (user.HouseholdId != null)
+            {
+                return RedirectToAction("Details", new { id = HouseId });
+            }
+            else
+            {
+                return RedirectToAction("Create");
+            }
+
         }
 
         // GET: Households/Details/5
-        public ActionResult Details()
+        public ActionResult Details(int? id)
         {
-            var userId = User.Identity.GetUserId();
-            var user = db.Users.Find(userId);
-            var id = user.Household.Id;
             Households households = db.Households.Find(id);
             
             return View(households);
@@ -52,8 +61,19 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                households.Created = DateTime.Now;
                 db.Households.Add(households);
+
+                //Add User to Household
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                user.HouseholdId = households.Id;
+
+                //Add User Role
+                roleHelper.AddUserToRole(userId, "HouseholdHead");
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -131,7 +151,7 @@ namespace FinancialPortal.Controllers
                     var inhabitants = db.Users.Where(u => u.HouseholdId == user.HouseholdId).Count();
                     if(inhabitants > 1)
                     {
-                        TempData["Message"] = $"";
+                        TempData["Message"] = $"You are unable to leave the Household at this time as there are still <b>{inhabitants}</b> Members remaining.";
                         return RedirectToAction("ExitDenied");
                     }
 
@@ -167,11 +187,11 @@ namespace FinancialPortal.Controllers
 
             if (myHouseholdId == 0)
             {
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Index", "Home");
             }
 
             var member = db.Users.Where(u => u.HouseholdId == myHouseholdId && u.Id != userId);
-            ViewBag.NewHoh = new SelectList(member, "Id", "FullName");
+            ViewBag.NewHoh = new SelectList(member, "Id", "DisplayName");
 
             return View();
         }
@@ -182,7 +202,7 @@ namespace FinancialPortal.Controllers
         {
             if (string.IsNullOrEmpty(newHoh))
             {
-                return RedirectToAction("Dashboard", "Home");
+                return RedirectToAction("AppointSuccessorAsync", "Households");
             }
 
             var me = db.Users.Find(User.Identity.GetUserId());
@@ -195,9 +215,9 @@ namespace FinancialPortal.Controllers
             roleHelper.RemoveUserFromRole(newHoh, "Member");
             roleHelper.AddUserToRole(newHoh, "HouseholdHead");
 
-            notificationHelper.SendNewRoleNotification(newHoh, "HouseholdHead");
+            //notificationHelper.SendNewRoleNotification(newHoh, "HouseholdHead");
 
-            return RedirectToAction("Dashboard", "Home");
+            return RedirectToAction("Index", "Home");
             
         }
 

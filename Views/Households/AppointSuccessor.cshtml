@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "AppointSuccessor";
+}
+
+<h2>AppointSuccessor</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <p>Please appoint your successor in order to hand over the Role of Head Of Household and complete the exit process.</p>
+
+    @Html.Label("Choose new Head of Household")
+    @Html.DropDownList("NewHoh", null, "--Select User--", new { @class = "form-control"})
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+

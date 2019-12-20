@@ -321,6 +321,8 @@
     <Content Include="Views\Invitations\Edit.cshtml" />
     <Content Include="Views\Invitations\Index.cshtml" />
     <Content Include="Views\Account\AcceptInvitation.cshtml" />
+    <Content Include="Views\Households\ExitDenied.cshtml" />
+    <Content Include="Views\Households\AppointSuccessor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912131421176_InitialCreate.resx">
