@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinancialPortal.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FinancialPortal.Controllers
 {
@@ -52,9 +53,10 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                budgetItems.Created = DateTime.Now;
                 db.BudgetItems.Add(budgetItems);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Budgets", new { id = budgetItems.BudgetId });
             }
 
             ViewBag.BudgetId = new SelectList(db.Budgets, "Id", "OwnerId", budgetItems.BudgetId);
@@ -88,7 +90,7 @@ namespace FinancialPortal.Controllers
             {
                 db.Entry(budgetItems).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Budgets", new { id = budgetItems.BudgetId });
             }
             ViewBag.BudgetId = new SelectList(db.Budgets, "Id", "OwnerId", budgetItems.BudgetId);
             return View(budgetItems);
@@ -117,7 +119,7 @@ namespace FinancialPortal.Controllers
             BudgetItems budgetItems = db.BudgetItems.Find(id);
             db.BudgetItems.Remove(budgetItems);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "Budgets", new { id = budgetItems.BudgetId });
         }
 
         protected override void Dispose(bool disposing)

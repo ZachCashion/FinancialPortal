@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinancialPortal.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FinancialPortal.Controllers
 {
@@ -17,8 +18,29 @@ namespace FinancialPortal.Controllers
         // GET: Budgets
         public ActionResult Index()
         {
-            var budgets = db.Budgets.Include(b => b.Household).Include(b => b.Owner);
-            return View(budgets.ToList());
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            var houseId = user.HouseholdId;
+            var house = db.Households.Find(houseId);
+            //var budgets = db.Budgets.Include(b => b.Household).Include(b => b.Owner);
+
+            if (user.HouseholdId != null)
+            {
+                if (house.Budgets.FirstOrDefault() != null)
+                {
+                    var budgetId = house.Budgets.FirstOrDefault().Id;
+                    return RedirectToAction("Details", new { id = budgetId });
+                }
+                else
+                {
+                    return RedirectToAction("Create");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Create", "Households");
+            }
+            
         }
 
         // GET: Budgets/Details/5
@@ -53,9 +75,17 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                var houseId = user.HouseholdId;
+                var house = db.Households.Find(houseId);
+
+                budgets.Created = DateTime.Now;
+                budgets.HouseholdId = house.Id;
+                budgets.OwnerId = user.Id;
                 db.Budgets.Add(budgets);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = budgets.Id });
             }
 
             ViewBag.HouseholdId = new SelectList(db.Households, "Id", "Name", budgets.HouseholdId);
