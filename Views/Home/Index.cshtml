@@ -16,7 +16,7 @@
                 <div class="card-body">
                     @foreach (var item in dashboard.ListBankAccounts())
                     {
-                        <div>@Html.DisplayFor(modelItem => item.Name) : @Html.DisplayFor(modelItem => item.CurrentBalance)</div> 
+                        <div>@Html.DisplayFor(modelItem => item.Name) : $@Html.DisplayFor(modelItem => item.CurrentBalance)</div> 
                     }
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     @foreach (var item in dashboard.ListTransactions())
                     {
                         <div>@Html.DisplayFor(modelItem => item.Created) - @Html.DisplayFor(modelItem => item.BankAccount.Name)</div>
-                        <div>@Html.DisplayFor(modelItem => item.Owner.DisplayName) - @Html.DisplayFor(modelItem => item.Amount)</div>
+                        <div>@Html.DisplayFor(modelItem => item.Owner.DisplayName) - $@Html.DisplayFor(modelItem => item.Amount)</div>
                         <div>@Html.DisplayFor(modelItem => item.Memo)</div>
                     }
                 </div>
@@ -99,8 +99,7 @@
               backgroundColor: "#4e73df",
               hoverBackgroundColor: "#2e59d9",
               borderColor: "#4e73df",
-                data: [@dashboard.ListBudgetItems().Where(i => i.BudgetItemCatagory == 0).Count(),@dashboard.ListBudgetItems().Where(i => i.BudgetItemCatagory == 1).Count()
-                ],
+                data: [@dashboard.ListBudgetItems().Where(i => i.BudgetItemCatagory == 0).Count()],
             }],
           },
           options: {
@@ -130,10 +129,13 @@
               yAxes: [{
                 ticks: {
                   min: 0,
-                  max: 10,
+                  max: 1000,
                   maxTicksLimit: 5,
                   padding: 10,
-
+                  // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    return '$' + number_format(value);
+                  }
                 },
                 gridLines: {
                   color: "rgb(234, 236, 244)",
