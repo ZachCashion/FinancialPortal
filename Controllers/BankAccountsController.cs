@@ -14,6 +14,7 @@ namespace FinancialPortal.Controllers
     public class BankAccountsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
 
         // GET: BankAccounts
         public ActionResult Index()
@@ -55,8 +56,13 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                var houseId = user.Household.Id;
+
                 bankAccounts.Created = DateTime.Now;
-                bankAccounts.OwnerId = User.Identity.GetUserId();
+                bankAccounts.OwnerId = userId;
+                bankAccounts.HouseholdId = houseId;
                 db.BankAccounts.Add(bankAccounts);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -17,7 +17,7 @@ namespace FinancialPortal.Extensions
         {
             var Url = new UrlHelper(HttpContext.Current.Request.RequestContext);
             var callbackUrl = Url.Action("AcceptInvitation", "Account", new { recipientEmail = invitations.RecipientEmail, code = invitations.Code }, protocol: HttpContext.Current.Request.Url.Scheme);
-            var from = $"Financial Portal<{WebConfigurationManager.AppSettings["emailfrom"]}>";
+            var from = $"Financial Portal<{WebConfigurationManager.AppSettings["emailto"]}>";
 
             var emailMessage = new MailMessage(from, invitations.RecipientEmail)
             {
