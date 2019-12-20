@@ -53,6 +53,13 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Find(userId);
+                var houseId = user.HouseholdId;
+                var house = db.Households.Find(houseId);
+                var budgetId = house.Budgets.FirstOrDefault().Id;
+
+                budgetItems.BudgetId = budgetId;
                 budgetItems.Created = DateTime.Now;
                 db.BudgetItems.Add(budgetItems);
                 db.SaveChanges();

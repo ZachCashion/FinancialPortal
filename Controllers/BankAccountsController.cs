@@ -19,6 +19,16 @@ namespace FinancialPortal.Controllers
         // GET: BankAccounts
         public ActionResult Index()
         {
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Find(userId);
+            var houseId = user.HouseholdId;
+            var house = db.Households.Find(houseId);
+
+            if (house == null)
+            {
+                return RedirectToAction("Create", "Households");
+            }
+
             var bankAccounts = db.BankAccounts.Include(b => b.Household).Include(b => b.Owner);
             return View(bankAccounts.ToList());
         }

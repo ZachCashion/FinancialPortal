@@ -1,5 +1,7 @@
-﻿@{
+﻿@using FinancialPortal.Helpers
+@{
     ViewBag.Title = "Home Page";
+    var dashboard = new DashboardHelper();
 }
 
 
@@ -12,7 +14,10 @@
                     <h6 class="m-0 font-weight-bold">Accounts</h6>
                 </div>
                 <div class="card-body">
-                    The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
+                    @foreach (var item in dashboard.ListBankAccounts())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item.Name) : @Html.DisplayFor(modelItem => item.CurrentBalance)</div> 
+                    }
                 </div>
             </div>
         </div>
@@ -23,7 +28,12 @@
                     <h6 class="m-0 font-weight-bold">Recent Transactions</h6>
                 </div>
                 <div class="card-body">
-                    The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
+                    @foreach (var item in dashboard.ListTransactions())
+                    {
+                        <div>@Html.DisplayFor(modelItem => item.Created) - @Html.DisplayFor(modelItem => item.BankAccount.Name)</div>
+                        <div>@Html.DisplayFor(modelItem => item.Owner.DisplayName) - @Html.DisplayFor(modelItem => item.Amount)</div>
+                        <div>@Html.DisplayFor(modelItem => item.Memo)</div>
+                    }
                 </div>
             </div>
         </div>
@@ -37,7 +47,7 @@
                 </div>
                 <div class="card-body">
                     <div class="chart-bar">
-                        <canvas id="myBarChart"></canvas>
+                        <canvas id="BarChart"></canvas>
                     </div>
 
                 </div>
@@ -48,5 +58,116 @@
 
 @section scripts{
 
-    <script src="~/Scripts/chart-bar-demo.js"></script>
+    <script>
+        // Set new default font family and font color to mimic Bootstrap's default styling
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+
+        function number_format(number, decimals, dec_point, thousands_sep) {
+          // *     example: number_format(1234.56, 2, ',', ' ');
+          // *     return: '1 234,56'
+          number = (number + '').replace(',', '').replace(' ', '');
+          var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function(n, prec) {
+              var k = Math.pow(10, prec);
+              return '' + Math.round(n * k) / k;
+            };
+          // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+          s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+          if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+          }
+          if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+          }
+          return s.join(dec);
+        }
+
+        // Bar Chart Example
+        var ctx = document.getElementById("BarChart");
+        var myBarChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ["Housing", "Transportation", "Food", "Utilities", "Clothing", "Medical", "Insurance", "Personal", "Debt", "Education", "Savings", "Entertainment"],
+            datasets: [{
+              label: "",
+              backgroundColor: "#4e73df",
+              hoverBackgroundColor: "#2e59d9",
+              borderColor: "#4e73df",
+                data: [@dashboard.ListBudgetItems().Where(i => i.BudgetItemCatagory == 0).Count(),@dashboard.ListBudgetItems().Where(i => i.BudgetItemCatagory == 1).Count()
+                ],
+            }],
+          },
+          options: {
+            maintainAspectRatio: false,
+            layout: {
+              padding: {
+                left: 10,
+                right: 25,
+                top: 25,
+                bottom: 0
+              }
+            },
+            scales: {
+              xAxes: [{
+                time: {
+                  unit: 'month'
+                },
+                gridLines: {
+                  display: false,
+                  drawBorder: false
+                },
+                ticks: {
+                  maxTicksLimit: 20
+                },
+                maxBarThickness: 50,
+              }],
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  max: 10,
+                  maxTicksLimit: 5,
+                  padding: 10,
+
+                },
+                gridLines: {
+                  color: "rgb(234, 236, 244)",
+                  zeroLineColor: "rgb(234, 236, 244)",
+                  drawBorder: false,
+                  borderDash: [2],
+                  zeroLineBorderDash: [2]
+                }
+              }],
+            },
+            legend: {
+              display: false
+            },
+            tooltips: {
+              titleMarginBottom: 10,
+              titleFontColor: '#6e707e',
+              titleFontSize: 14,
+              backgroundColor: "rgb(255,255,255)",
+              bodyFontColor: "#858796",
+              borderColor: '#dddfeb',
+              borderWidth: 1,
+              xPadding: 15,
+              yPadding: 15,
+              displayColors: false,
+              caretPadding: 10,
+              callbacks: {
+                label: function(tooltipItem, chart) {
+                  var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                  return datasetLabel + '' + number_format(tooltipItem.yLabel);
+                }
+              }
+            },
+          }
+        });
+
+    </script>
 }
