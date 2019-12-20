@@ -26,10 +26,10 @@ namespace FinancialPortal.Controllers
         {
             var userId = User.Identity.GetUserId();
             var user = db.Users.Find(userId);
-            var HouseId = user.Household.Id;
+           
             if (user.HouseholdId != null)
             {
-                return RedirectToAction("Details", new { id = HouseId });
+                return RedirectToAction("Details", new { id = user.Household.Id });
             }
             else
             {

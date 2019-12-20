@@ -21,7 +21,7 @@
 
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.BankAccount, "Bank Account", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.BankAccount, "Bank Account", htmlAttributes: new { @class = "control-label col-auto" })
                         <div class="col-md-10">
                             @Html.DropDownList("BankAccountId", null, htmlAttributes: new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.BankAccountId, "", new { @class = "text-danger" })
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-auto" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Memo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.Memo, htmlAttributes: new { @class = "control-label col-auto" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.Memo, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Memo, "", new { @class = "text-danger" })

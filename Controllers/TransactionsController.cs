@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FinancialPortal.Models;
+using Microsoft.AspNet.Identity;
 
 namespace FinancialPortal.Controllers
 {
@@ -54,9 +55,13 @@ namespace FinancialPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                
+                transactions.OwnerId = userId;
+                transactions.Created = DateTime.Now;
                 db.Transactions.Add(transactions);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BankAccounts", new { id = transactions.BankAccountId });
             }
 
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "OwnerId", transactions.BankAccountId);
@@ -94,7 +99,7 @@ namespace FinancialPortal.Controllers
             {
                 db.Entry(transactions).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BankAccounts", new { id = transactions.BankAccountId });
             }
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "OwnerId", transactions.BankAccountId);
             ViewBag.BudgetItemId = new SelectList(db.BudgetItems, "Id", "Name", transactions.BudgetItemId);
@@ -125,7 +130,7 @@ namespace FinancialPortal.Controllers
             Transactions transactions = db.Transactions.Find(id);
             db.Transactions.Remove(transactions);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "BankAccounts", new { id = transactions.BankAccountId });
         }
 
         protected override void Dispose(bool disposing)
