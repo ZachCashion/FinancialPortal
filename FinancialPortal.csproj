@@ -315,6 +315,9 @@
     <Content Include="Views\Transactions\Details.cshtml" />
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\financialportal.zachcashion.com - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\financialportal.zachcashion.pubxml" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Properties\PublishProfiles\ZachCashionFinancialPortal - Web Deploy.pubxml" />
     <Content Include="Views\Invitations\Create.cshtml" />
     <Content Include="Views\Invitations\Delete.cshtml" />
